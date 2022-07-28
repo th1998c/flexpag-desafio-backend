@@ -1,3 +1,67 @@
+# Intruções para uso da aplicação.
+
+Sempre que na URL houver {{id}}, deve ser substituido pelo id do pagamento. 
+
+exemplo:
+
+antes:
+http://localhost:8080/payments/{{id}}
+
+depois:
+http://localhost:8080/payments/1
+
+
+Foram instanciados em Config.java 3 agendamentos para exemplificação, porém existe um método abaixo para criação via JSON.
+
+## Efetuar busca de todos os pagamentos registrados - GET
+
+http://localhost:8080/payments/
+
+## Efetuar busca por id e ter todos os dados do pagamento - GET
+
+http://localhost:8080/payments/{{id}}
+
+## Efetuar busca por id e ter o status do pagamento. Haverá o retorno PENDING | PAID - GET
+
+http://localhost:8080/payments/status/{{id}}
+
+## registrar agendamento - POST
+
+É necessário informar apenas o valor, data e horario do pagamento como no exemplo a seguir utilizando o metodo POST.
+
+O agendamento é registrado, com status PENDING e a requisição retorna o seu ID.
+
+    {
+        "valueOfPayment": 2000.0,
+        "date": "2022-07-28 12:00:00"
+    }
+
+
+http://localhost:8080/payments/create
+
+## Efetuar alteraçã de status do pagamento para PAID - PUT
+
+http://localhost:8080/payments/pay/{{id}}
+
+Ao alterar a o Status de pagamento para PAID, não será possível excluir o agendamento ou alterar sua data e hora.
+
+## Efetuar exclusão de agendamento - só é possivel Deletar agendamentos com status PENDING - DELETE
+
+http://localhost:8080/payments/delete/{{id}}
+
+
+## Efetuar alteração da data ou hora - só é possivel atualizar agendamentos com status PENDING - PUT
+
+informar na URL o ID e passar nova data e hora via JSON como no exemplo abaixo.
+
+    	{
+        "date": "2022-03-12 22:00:00",
+    	}
+
+http://localhost:8080/payments/UpdateDateOrHour/{{id}}
+
+
+
 <p align="center">
  <img src="https://github.com/jsantos-examples/flexpag-desafio-backend/blob/main/contents/flexpag.png" width="600" alt="Banner Flexpag">
 </p>
