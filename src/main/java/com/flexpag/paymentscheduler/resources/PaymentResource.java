@@ -50,6 +50,12 @@ public class PaymentResource {
 		
 	}
 	
+	//criação de agendamento via JSON
+	//ex:
+	//	{
+	//        "valueOfPayment": 2000.0,
+	//        "date": "2022-07-28 12:00:00"
+	//	}
 	@PostMapping(value = "/create")
 	public ResponseEntity<Long> createPayment(@RequestBody Payment payment){
 		payment = paymentService.createPayment(payment);
